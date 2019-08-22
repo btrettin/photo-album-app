@@ -1,0 +1,21 @@
+{
+  "name": "photo-album-app",
+  "version": "1.0.0",
+  "description": "Node.js Console Application that returns photo ids and titles in a given album.",
+  "main": "main.js",
+  "scripts": {
+    "test": "nyc mocha"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "Ben Trettin",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "nyc": "^14.1.1",
+    "sinon": "^7.4.1"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^6.2.0"
+  }
+}
