@@ -12,6 +12,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "nyc": "^14.1.1",
+    "request": "^2.88.0",
     "sinon": "^7.4.1"
   },
   "license": "ISC",
