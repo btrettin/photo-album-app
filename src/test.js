@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const app = require('./photo-album.js');
 const request = require('request');
 const body = require('./test-body.js');
-const errMsg = 'invalid argument';
+const errMsg = 'Argument must be an int from 1-100. Ex: node photo-album 43';
 
 describe('isInt', () => {
   it('should return true if the string only contains digits', () => {

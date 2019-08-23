@@ -1,6 +1,8 @@
 const request = require('request');
 
-const isInt = str => true;
+const errMsg = 'Argument must be an int from 1-100. Ex: node photo-album 43';
+
+const isInt = str => /^\d+$/.test(str);
 
 const photoAlbum = id => {
   isInt(id) && id > 0 && id < 101
@@ -12,7 +14,7 @@ const photoAlbum = id => {
             console.log(`[${photo.id}] ${photo.title}`)
           )
       )
-    : console.log('invalid argument');
+    : console.log(errMsg);
 };
 
 module.exports = { photoAlbum, isInt };
