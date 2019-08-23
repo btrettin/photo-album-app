@@ -3,6 +3,7 @@ const sinon = require('sinon');
 const app = require('./photo-album.js');
 const request = require('request');
 const body = require('./test-body.js');
+const errMsg = 'invalid argument';
 
 describe('photoAlbum', () => {
   describe('photoAlbum with invalid parameters', () => {
@@ -12,15 +13,31 @@ describe('photoAlbum', () => {
     afterEach(() => {
       sinon.restore();
     });
-    it('should log error when albumId is less than 1', () => {
+    it('should log errMsg with no albumId', () => {
+      app();
+      expect(console.log.calledOnce).to.be.true;
+      expect(console.log.calledWith(errMsg)).to.be.true;
+    });
+    it('should log errMsg with albumId less than 1', () => {
       app('0');
       expect(console.log.calledOnce).to.be.true;
-      expect(console.log.calledWith('invalid argument')).to.be.true;
+      expect(console.log.calledWith(errMsg)).to.be.true;
     });
-    it('should log error when albumId is greater than 100', () => {
+    it('should log errMsg with albumId greater than 100', () => {
       app('101');
       expect(console.log.calledOnce).to.be.true;
-      expect(console.log.calledWith('invalid argument')).to.be.true;
+      expect(console.log.calledWith(errMsg)).to.be.true;
+    });
+    it('should log errMsg with albumId containing characters', () => {
+      app('1x5');
+      expect(console.log.calledOnce).to.be.true;
+      expect(console.log.calledWith(errMsg)).to.be.true;
+    });
+    it('should log errMsg with albumId containing floats', () => {
+      app('1.5');
+      expect(console.log.calledOnce).to.be.true;
+      expect(console.log.calledWith(errMsg)).to.be.true;
+      expect(console.log.callCount).to.equal(1);
     });
   });
   describe('photoAlbum with valid parameters', () => {
