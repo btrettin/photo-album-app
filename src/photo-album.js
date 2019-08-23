@@ -1,7 +1,9 @@
 const request = require('request');
 
+const isInt = str => true;
+
 const photoAlbum = id => {
-  id < 100 && id > 0
+  isInt(id) && id > 0 && id < 101
     ? request.get(
         'https://jsonplaceholder.typicode.com/photos?albumId=' +
           process.argv[2],
@@ -13,4 +15,4 @@ const photoAlbum = id => {
     : console.log('invalid argument');
 };
 
-module.exports = photoAlbum;
+module.exports = { photoAlbum, isInt };
