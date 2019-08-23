@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const app = require('./photo-album.js');
 const request = require('request');
+const app = require('./photo-album.js');
 const body = require('./test-body.js');
 const errMsg = 'Argument must be an int from 1-100. Ex: node photo-album 43';
 
@@ -56,29 +56,34 @@ describe('photoAlbum', () => {
   });
   describe('photoAlbum with valid parameters', () => {
     beforeEach(() => {
+      sinon.spy(console, 'log');
+      sinon.spy(JSON, 'parse');
       sinon.stub(request, 'get').yields(null, null, body);
+      app.photoAlbum('4');
     });
     afterEach(() => {
       sinon.restore();
     });
     it('should parse the body of an http request', done => {
-      sinon.spy(JSON, 'parse');
-      app.photoAlbum('4');
       expect(JSON.parse.callCount).to.equal(1);
       done();
     });
     it('should log 50 times', done => {
-      sinon.spy(console, 'log');
-      app.photoAlbum('4');
       expect(console.log.callCount).to.equal(50);
       done();
     });
     it('should provide the correct arguments to the first log', done => {
-      sinon.spy(console, 'log');
-      app.photoAlbum('4');
       expect(
         console.log.firstCall.calledWith(
           '[151] possimus dolor minima provident ipsam'
+        )
+      ).to.be.true;
+      done();
+    });
+    it('should provide the correct arguments to the last log', done => {
+      expect(
+        console.log.lastCall.calledWith(
+          '[200] perspiciatis est commodi iste nulla et eveniet voluptates eum'
         )
       ).to.be.true;
       done();
